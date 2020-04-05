@@ -33,6 +33,7 @@ pop.country <- plyr::dlply(
   pop.dd.new,
   'region'
 )
+source('./0A-Z-function.R')
 pop.DF <- list()
 cat('---------------*---------------\n')
 for(i in 1:length(sh.files)){
