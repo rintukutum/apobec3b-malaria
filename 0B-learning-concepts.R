@@ -1,52 +1,52 @@
 #------------------------
 # Spatial Data Analysis with R book
-# set.seed(0)
-# xy <- cbind(x=runif(1000, 0, 100), y=runif(1000, 0, 100))
-# income <- (runif(1000) * abs((xy[,1] - 50) * (xy[,2] - 50))) / 500
-# 
-# par(mfrow=c(1,3), las=1)
-# plot(sort(income), col=rev(terrain.colors(1000)), pch=20, cex=.75, ylab='income')
-# hist(income, main='', col=rev(terrain.colors(10)), xlim=c(0,5), breaks=seq(0,5,0.5))
-# plot(xy, xlim=c(0,100), ylim=c(0,100), cex=income, 
-#      col=rev(terrain.colors(50))[10*(income+1)])
-# 
-# n <- length(income)
-# G <- (2 * sum(sort(income) * 1:n)/sum(income) - (n + 1)) / n
-# 
-# ibrary(raster)
-# r1 <- raster(ncol=1, nrow=4, xmn=0, xmx=100, ymn=0, ymx=100, crs=NA)
-# r1 <- rasterize(xy, r1, income, mean)
-# r2 <- raster(ncol=4, nrow=1, xmn=0, xmx=100, ymn=0, ymx=100, crs=NA)
-# r2 <- rasterize(xy, r2, income, mean)
-# r3 <- raster(ncol=2, nrow=2, xmn=0, xmx=100, ymn=0, ymx=100, crs=NA)
-# r3 <- rasterize(xy, r3, income, mean)
-# r4 <- raster(ncol=3, nrow=3, xmn=0, xmx=100, ymn=0, ymx=100, crs=NA)
-# r4 <- rasterize(xy, r4, income, mean)
-# r5 <- raster(ncol=5, nrow=5, xmn=0, xmx=100, ymn=0, ymx=100, crs=NA)
-# r5 <- rasterize(xy, r5, income, mean)
-# r6 <- raster(ncol=10, nrow=10, xmn=0, xmx=100, ymn=0, ymx=100, crs=NA)
-# r6 <- rasterize(xy, r6, income, mean)
-# par(mfrow=c(2,3), las=1)
-# plot(r1); plot(r2); plot(r3); plot(r4); plot(r5); plot(r6)
-# 
-# par(mfrow=c(1,3),las=1)
-# hist(r4, main='',col=rev(terrain.colors(10)), xlim=c(0,5), breaks=seq(0, 5, 0.5))
-# hist(r5, main='',col=rev(terrain.colors(10)), xlim=c(0,5), breaks=seq(0, 5, 0.5))
-# hist(r6, main='',col=rev(terrain.colors(10)), xlim=c(0,5), breaks=seq(0, 5, 0.5))
-# 
-# 
-# #--------------------
-# # AUTOCORRELATION
-# set.seed(0)
-# d <- sample(100, 10)
-# d
-# # compute auto-correlation
-# a <- d[-length(d)]
-# b <- d[-1]
-# plot(a, b, xlab='t', ylab='t-1')
+# by Robert J. Hijmans and Aniruddha Ghosh
+# URL: https://www.springer.com/gp/book/9781461476177
+#------------------------
+# Chapter 2. Scale and distance
+set.seed(0)
+xy <- cbind(x=runif(1000, 0, 100), y=runif(1000, 0, 100))
+income <- (runif(1000) * abs((xy[,1] - 50) * (xy[,2] - 50))) / 500
 
+par(mfrow=c(1,3), las=1)
+plot(sort(income), col=rev(terrain.colors(1000)), pch=20, cex=.75, ylab='income')
+hist(income, main='', col=rev(terrain.colors(10)), xlim=c(0,5), breaks=seq(0,5,0.5))
+plot(xy, xlim=c(0,100), ylim=c(0,100), cex=income,
+     col=rev(terrain.colors(50))[10*(income+1)])
 
+n <- length(income)
+G <- (2 * sum(sort(income) * 1:n)/sum(income) - (n + 1)) / n
 
+library(raster)
+r1 <- raster(ncol=1, nrow=4, xmn=0, xmx=100, ymn=0, ymx=100, crs=NA)
+r1 <- rasterize(xy, r1, income, mean)
+r2 <- raster(ncol=4, nrow=1, xmn=0, xmx=100, ymn=0, ymx=100, crs=NA)
+r2 <- rasterize(xy, r2, income, mean)
+r3 <- raster(ncol=2, nrow=2, xmn=0, xmx=100, ymn=0, ymx=100, crs=NA)
+r3 <- rasterize(xy, r3, income, mean)
+r4 <- raster(ncol=3, nrow=3, xmn=0, xmx=100, ymn=0, ymx=100, crs=NA)
+r4 <- rasterize(xy, r4, income, mean)
+r5 <- raster(ncol=5, nrow=5, xmn=0, xmx=100, ymn=0, ymx=100, crs=NA)
+r5 <- rasterize(xy, r5, income, mean)
+r6 <- raster(ncol=10, nrow=10, xmn=0, xmx=100, ymn=0, ymx=100, crs=NA)
+r6 <- rasterize(xy, r6, income, mean)
+par(mfrow=c(2,3), las=1)
+plot(r1); plot(r2); plot(r3); plot(r4); plot(r5); plot(r6)
+
+par(mfrow=c(1,3),las=1)
+hist(r4, main='',col=rev(terrain.colors(10)), xlim=c(0,5), breaks=seq(0, 5, 0.5))
+hist(r5, main='',col=rev(terrain.colors(10)), xlim=c(0,5), breaks=seq(0, 5, 0.5))
+hist(r6, main='',col=rev(terrain.colors(10)), xlim=c(0,5), breaks=seq(0, 5, 0.5))
+#--------------------
+# Chapter 3. Spatial autocorrelation
+set.seed(0)
+d <- sample(100, 10)
+d
+# compute auto-correlation
+a <- d[-length(d)]
+b <- d[-1]
+plot(a, b, xlab='t', ylab='t-1')
+#--------------
 library(raster)
 p <- shapefile(system.file("external/lux.shp", package="raster"))
 p <- p[p$NAME_1=="Diekirch", ]
@@ -90,8 +90,6 @@ moran(p$value, ww, n=length(ww$neighbours), S0=Szero(ww))
 moran.test(p$value, ww, randomisation=FALSE)
 
 moran.mc(p$value, ww, nsim=99)
-
-
 n <- length(p)
 ms <- cbind(id=rep(1:n, each=n), y=rep(y, each=n), value=as.vector(wm * y))
 ms <- ms[ms[,3] > 0, ]
@@ -107,6 +105,7 @@ abline(reg, lwd=2)
 abline(h=mean(ams[,2]), lt=2)
 abline(v=ybar, lt=2)
 #------------------------
+# Chapter 4. Interpolation
 #------------------------
 if (!require("rspatial")) remotes::install_github('rspatial/rspatial')
 library(rspatial)
@@ -149,8 +148,9 @@ spplot(vca, 'prec', col.regions=rev(get_col_regions()))
 r <- raster(cata, res=10000)
 vr <- rasterize(vca, r, 'prec')
 plot(vr)
-
-#-------------
+#-------------***------------
+rm(list=ls())
+#-------------***------------
 # STEP 01: DATA FRAME to spatial obeject
 #-------------
 # AQ data
@@ -211,3 +211,6 @@ m <- Tps(coordinates(aq), aq$OZDLYAV)
 tps <- interpolate(r, m)
 tps <- mask(tps, idw)
 plot(tps)
+
+
+
