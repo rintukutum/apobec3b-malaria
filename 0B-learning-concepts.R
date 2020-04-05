@@ -1,5 +1,5 @@
 #------------------------
-# Spatial Analysis with R book
+# Spatial Data Analysis with R book
 # set.seed(0)
 # xy <- cbind(x=runif(1000, 0, 100), y=runif(1000, 0, 100))
 # income <- (runif(1000) * abs((xy[,1] - 50) * (xy[,2] - 50))) / 500
